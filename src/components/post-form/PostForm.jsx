@@ -79,18 +79,21 @@ export default function PostForm({ post }) {
   }, [watch, slugTransform, setValue]);
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
-      <div className="w-2/3 px-2">
+    <form
+      onSubmit={handleSubmit(submit)}
+      className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-6 "
+    >
+      <div className="lg:col-span-2 space-y-6">
         <Input
           label="Title :"
           placeholder="Title"
-          className="mb-4"
+          className="block w-full border  p-3 "
           {...register("title", { required: true })}
         />
         <Input
           label="Slug :"
           placeholder="Slug"
-          className="mb-4"
+          className="block w-full border  p-3"
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.currentTarget.value), {
@@ -105,11 +108,11 @@ export default function PostForm({ post }) {
           defaultValue={getValues("content")}
         />
       </div>
-      <div className="w-1/3 px-2">
+      <div className="space-y-6">
         <Input
           label="Featured Image :"
           type="file"
-          className="mb-4"
+          className="block w-full border  p-3"
           accept="image/png, image/jpg, image/jpeg, image/gif"
           {...register("image", { required: !post })}
         />
@@ -125,13 +128,13 @@ export default function PostForm({ post }) {
         <Select
           options={["active", "inactive"]}
           label="Status"
-          className="mb-4"
+          className="block w-full border  p-3"
           {...register("status", { required: true })}
         />
         <Button
           type="submit"
           bgColor={post ? "bg-green-500" : undefined}
-          className="w-full"
+          className="w-full  rounded-lg text-white"
         >
           {post ? "Update" : "Submit"}
         </Button>
